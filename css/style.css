@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
 * {
   box-sizing: border-box;
 }
@@ -7,21 +8,27 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: #323232;
 }
 .wrap-btns {
-  max-width: 600px;
+  max-width: 440px;
   display: flex;
- justify-content: center;
+  justify-content: center;
   width: 100%;
 }
 button {
   margin: 10px;
 }
+.wrap-btns button:last-child {
+  margin-left: auto;
+}
 .active {
-  border: 2px solid #ccc;
+  outline: 3px solid #3f51b536;
 }
 .users-list {
-  max-width: 600px;
+  max-width: 420px;
   width: 100%;
   min-width: 320px;
   margin: 0 auto;
@@ -29,16 +36,16 @@ button {
 
 .user-list-item {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
+  padding: 20px 10px;
+  margin-bottom: 15px;
   display: flex;
   justify-content: start;
   align-items: center;
   border-radius: 5px;
 }
 .user-list-item img {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
   border-radius: 50%;
 }
@@ -51,4 +58,41 @@ button {
   margin-left: auto;
   border: none;
   background-color: transparent;
+}
+
+.item-active-user {
+  padding: 5px;
+}
+
+.active-users {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+}
+.user-list-item div p:first-child {
+  font-size: 21px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+.user-list-item div a {
+  display: block;
+  color: #3772a1;
+  text-decoration: none;
+  margin-bottom: 5px;
+}
+.gender {
+  margin-bottom: 5px;
+}
+.wrap-btns button {
+  padding: 10px 15px;
+  background-color: #5399d1;
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.wrap-btns button:hover {
+  background-color: #3772a1;
 }

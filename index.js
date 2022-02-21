@@ -31,24 +31,28 @@ nextBtn.addEventListener("click", nextBtnHandler);
 function firstBtnHendler() {
   options.page = 1;
   loadUsers(options);
+  clearList();
 }
 
 function prevBtnHandler() {
   if (options.page > 1) {
     options.page -= 1;
     loadUsers(options);
+    clearList();
   }
 }
 
 function nextBtnHandler() {
   options.page += 1;
   loadUsers(options);
+  clearList();
 }
 
 function renderUsers(users) {
   const usersList = document.querySelector(".users-list");
   const usersListItems = users.map((u) => createUserItem(u));
   usersList.replaceChildren(...usersListItems);
+  maleFemaleBg();
 }
 
 function createUserItem({
@@ -74,9 +78,9 @@ function createUserItem({
     userListItemInfoBlock
   );
 
-
   userListItem.addEventListener("click", (e) => {
     e.currentTarget.classList.toggle("active");
+    listActiveUsers();
   });
 
   return userListItem;
@@ -101,7 +105,7 @@ function createUserMainInfo(firstName, lastName) {
 
 function ageUser(age) {
   const userMainInfoElAge = document.createElement("p");
-  userMainInfoElAge.textContent = age;
+  userMainInfoElAge.textContent = `age: ${age}`;
   return userMainInfoElAge;
 }
 
@@ -115,29 +119,38 @@ function emailUser(email) {
 function genderUser(gender) {
   const userMainInfoElGender = document.createElement("p");
   userMainInfoElGender.textContent = gender;
+  userMainInfoElGender.classList.add("gender");
 
   userMainInfoElGender.textContent === "male"
-    ? userMainInfoElGender.classList.add("male")
-    : userMainInfoElGender.classList.add("female");
+    ? userMainInfoElGender.setAttribute("data-gender", "male")
+    : userMainInfoElGender.setAttribute("data-gender", "female");
 
   return userMainInfoElGender;
 }
 
-setInterval(() => {
-  maleBg();
-  femaleBg();
-}, 0);
+function maleFemaleBg() {
+  const gender = document.querySelectorAll(".gender");
 
-function maleBg() {
-  const maleBg = document.querySelectorAll(".male");
-  maleBg.forEach((e) => {
-    e.closest(".user-list-item").style.backgroundColor = "#b9daf1";
+  gender.forEach((e) => {
+    e.dataset.gender === "male"
+      ? (e.closest(".user-list-item").style.backgroundColor = "#ebf4fb")
+      : (e.closest(".user-list-item").style.backgroundColor = "#ebebfb");
   });
 }
 
-function femaleBg() {
-  const femaleBg = document.querySelectorAll(".female");
-  femaleBg.forEach((e) => {
-    e.closest(".user-list-item").style.backgroundColor = "#f3c9c0";
+function listActiveUsers() {
+  const listActiveUsers = document.querySelectorAll(".active");
+  const activeUsers = document.querySelector(".active-users");
+  let string = "";
+
+  listActiveUsers.forEach((e) => {
+    string += `${e.children[1].children[0].textContent.split(" ")[0]}, `;
   });
+
+  activeUsers.textContent = string;
+}
+
+function clearList() {
+  const activeUsers = document.querySelector(".active-users");
+  activeUsers.textContent = "";
 }
